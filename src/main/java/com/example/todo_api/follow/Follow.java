@@ -10,8 +10,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Follow {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +27,12 @@ public class Follow {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member follower;
 
-    @JoinColumn(name = "followee_id")
+    @JoinColumn(name = "following_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member followee;
+    private Member following;
+
+    public Follow(Member follower, Member following) {
+        this.follower = follower;
+        this.following = following;
+    }
 }

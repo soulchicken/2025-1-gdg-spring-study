@@ -43,4 +43,8 @@ public class Todo {
     @JoinColumn(name = "member_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
+
+    public void updateContent(String newContent) {
+        this.content = newContent;
+    }
 }
